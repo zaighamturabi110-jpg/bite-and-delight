@@ -8,99 +8,100 @@
     <style>
         .brand-maroon { background-color: #800020; }
         .brand-gold { background-color: #d4af37; }
-        .text-gold { color: #d4af37; }
         .cart-modal { display: none; }
         .cart-modal.active { display: flex; }
     </style>
 </head>
-<body class="bg-gray-50 pb-24">
-
+<body class="bg-gray-50 pb-24 font-sans text-gray-900">
     <header class="brand-maroon text-white p-4 sticky top-0 z-50 flex justify-between items-center shadow-lg">
         <div>
-            <h1 class="text-xl font-bold text-gold italic">Bite & Delight</h1>
-            <p class="text-[10px]">📞 9867163711</p>
+            <h1 class="text-xl font-black text-[#d4af37] italic uppercase">Bite & Delight</h1>
+            <p class="text-[10px] tracking-widest text-white/90">📞 8090444814</p>
         </div>
         <button onclick="toggleCart()" class="brand-gold text-black px-4 py-2 rounded-full font-bold text-sm shadow-md">
             🛒 Cart (<span id="cart-count">0</span>)
         </button>
     </header>
 
-    <main class="p-4 max-w-md mx-auto space-y-10">
-        <h2 class="text-center font-black text-2xl text-red-900 italic">MUMBAI'S FAVOURITE</h2>
-        
-        <div id="burgers">
-            <h3 class="text-lg font-bold text-red-900 border-b-2 border-gold mb-3">🍔 BURGERS</h3>
-            <div id="burger-list" class="space-y-3"></div>
-        </div>
+    <div class="bg-yellow-100 text-red-800 text-center py-2 text-xs font-bold uppercase border-b border-yellow-200 sticky top-[68px] z-40">
+        🚚 Free Home Delivery on ₹199 & Above!
+    </div>
 
-        <div id="bhel">
-            <h3 class="text-lg font-bold text-red-900 border-b-2 border-gold mb-3">🌶️ DESI BHEL BOWLS</h3>
-            <div id="bhel-list" class="space-y-3"></div>
-        </div>
+    <main class="p-4 max-w-md mx-auto space-y-8">
+        <section>
+            <h3 class="text-lg font-black text-red-900 border-b-4 border-[#d4af37] mb-4 inline-block pr-4 text-sm">🍔 BURGERS</h3>
+            <div id="burger-list" class="grid gap-3 text-xs"></div>
+        </section>
 
-        <div id="manchurian">
-            <h3 class="text-lg font-bold text-red-900 border-b-2 border-gold mb-3">🔥 MANCHURIAN</h3>
-            <div id="manch-list" class="space-y-3"></div>
-        </div>
+        <section>
+            <h3 class="text-lg font-black text-red-900 border-b-4 border-[#d4af37] mb-4 inline-block pr-4 text-sm">🌶️ DESI BHEL BOWLS</h3>
+            <div id="bhel-list" class="grid gap-3 text-xs"></div>
+        </section>
 
-        <div id="fries">
-            <h3 class="text-lg font-bold text-red-900 border-b-2 border-gold mb-3">🍟 FRIES</h3>
-            <div id="fries-list" class="space-y-3"></div>
-        </div>
+        <section>
+            <h3 class="text-lg font-black text-red-900 border-b-4 border-[#d4af37] mb-4 inline-block pr-4 text-sm">🔥 MANCHURIAN</h3>
+            <div id="manch-list" class="grid gap-3 text-xs"></div>
+        </section>
 
-        <div id="nuggets">
-            <h3 class="text-lg font-bold text-red-900 border-b-2 border-gold mb-3">🍗 NUGGETS & POPCORN</h3>
-            <div id="nugget-list" class="space-y-3"></div>
+        <section>
+            <h3 class="text-lg font-black text-red-900 border-b-4 border-[#d4af37] mb-4 inline-block pr-4 text-sm">🍟 SIDES & SNACKS</h3>
+            <div id="sides-list" class="grid gap-3 text-xs"></div>
+        </section>
+
+        <section>
+            <h3 class="text-lg font-black text-red-900 border-b-4 border-[#d4af37] mb-4 inline-block pr-4 text-sm">🎁 SPECIAL COMBOS</h3>
+            <div id="combo-list" class="grid gap-3 text-xs"></div>
+        </section>
+
+        <div class="bg-white p-6 rounded-3xl border-2 border-dashed border-gray-300 text-center space-y-4">
+            <h4 class="font-black text-red-900 uppercase text-xs">Scan to Pay Online</h4>
+            <div class="flex justify-center">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=zaigham.turabi110-6@oksbi" class="w-32 h-32 border p-1" alt="UPI QR">
+            </div>
+            <p class="text-[10px] text-gray-500 font-bold tracking-tight">zaigham.turabi110-6@oksbi</p>
+            <div class="bg-green-100 text-green-800 py-1 rounded text-[10px] font-bold uppercase">Cash on Delivery Available</div>
         </div>
     </main>
 
-    <section class="p-6 bg-maroon text-center border-t-4 border-gold bg-[#800020] text-white">
-        <h3 class="font-bold mb-3">Scan to Pay Online</h3>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=zaigham.turabi110-6@oksbi&pn=BiteAndDelight" class="mx-auto w-40 h-40 border-4 border-white p-1 rounded-lg">
-        <p class="text-[10px] mt-2">zaigham.turabi110-6@oksbi</p>
-    </section>
-
-    <div id="cartModal" class="cart-modal fixed inset-0 bg-black/80 z-[100] items-end">
-        <div class="bg-white w-full rounded-t-3xl p-6">
-            <h2 class="text-xl font-bold mb-4">Your Order</h2>
-            <div id="cart-items" class="space-y-2 mb-4"></div>
-            <input id="uName" type="text" placeholder="Name" class="w-full border p-2 mb-2 rounded">
-            <input id="uAddr" type="text" placeholder="Address/Table" class="w-full border p-2 mb-4 rounded">
-            <div class="flex justify-between items-center">
-                <span class="font-bold">Total: ₹<span id="cart-total">0</span></span>
-                <button onclick="checkout()" class="bg-green-600 text-white px-6 py-2 rounded-lg font-bold">WhatsApp Order</button>
+    <div id="cartModal" class="cart-modal fixed inset-0 bg-black/90 z-[100] items-end">
+        <div class="bg-white w-full rounded-t-3xl p-6 shadow-2xl overflow-y-auto max-h-[90vh]">
+            <h2 class="text-xl font-black mb-4 text-red-900 uppercase">Checkout Detail</h2>
+            <div id="cart-items" class="space-y-2 mb-6 border-b pb-4 text-sm italic"></div>
+            
+            <div class="space-y-3 mb-6">
+                <p class="font-bold text-[10px] text-gray-400 uppercase">Delivery Details:</p>
+                <input id="uName" type="text" placeholder="Full Name" class="w-full border p-3 rounded-xl font-bold text-sm bg-gray-50">
+                <input id="uPhone" type="tel" placeholder="Mobile Number" class="w-full border p-3 rounded-xl font-bold text-sm bg-gray-50">
+                <textarea id="uAddress" placeholder="Full Address with Landmark" class="w-full border p-3 rounded-xl font-bold text-sm bg-gray-50 h-20"></textarea>
             </div>
-            <button onclick="toggleCart()" class="w-full text-gray-400 mt-4">Close</button>
+
+            <div class="bg-gray-100 p-4 rounded-xl mb-6 flex justify-between items-center">
+                <span id="del-label" class="text-[10px] font-bold uppercase text-gray-500">Bill Total:</span>
+                <span class="font-black text-xl text-green-700">₹<span id="cart-total">0</span></span>
+            </div>
+
+            <button onclick="checkout()" class="w-full bg-green-600 text-white py-4 rounded-2xl font-black text-lg shadow-xl uppercase">Confirm Order on WhatsApp</button>
+            <button onclick="toggleCart()" class="w-full text-gray-400 font-bold text-xs mt-4">Back to Menu</button>
         </div>
     </div>
 
     <script>
-        const menuItems = {
-            burgers: [
-                {n:"Classic Chicken Burger", p:49}, {n:"Chicken Cheese Burger", p:69}, {n:"Tandoori Chicken Burger", p:89}, {n:"Peri-Peri Chicken Burger", p:79}
-            ],
-            bhel: [
-                {n:"Classic Bhel", p:20}, {n:"Chinese Manchurian Bhel", p:30}, {n:"Tandoori Bhel", p:30}, {n:"Peri-Peri Bhel", p:30}, {n:"Cheesy Bhel", p:30}, {n:"Garlic Bhel", p:30}, {n:"Cheesy Peri-Peri Bhel", p:35}, {n:"Build Your Own Bhel", p:50}
-            ],
-            manchurian: [
-                {n:"Classic Manchurian", p:25}, {n:"Peri-Peri Manchurian", p:35}, {n:"Garlic Manchurian", p:35}, {n:"Cheesy Manchurian", p:35}
-            ],
-            fries: [
-                {n:"Classic Fries", p:50}, {n:"Cheesy Fries", p:70}, {n:"Peri-Peri Fries", p:70}, {n:"Garlic Fries", p:70}
-            ],
-            nuggets: [
-                {n:"Chicken Popcorn (8pcs)", p:39}, {n:"Chicken Nuggets (4pcs)", p:49}, {n:"Loaded Nuggets (6pcs)", p:69}
-            ]
+        const menu = {
+            burger: [{n:"Classic Chicken Burger", p:49}, {n:"Chicken Cheese Burger", p:69}, {n:"Tandoori Chicken Burger", p:89}, {n:"Peri-Peri Chicken Burger", p:79}],
+            bhel: [{n:"Classic Bhel", p:20}, {n:"Chinese Manchurian Bhel", p:30}, {n:"Tandoori Bhel", p:30}, {n:"Peri-Peri Bhel", p:30}, {n:"Garlic Bhel", p:30}, {n:"Cheesy Bhel", p:30}, {n:"Cheesy Peri-Peri Bhel", p:35}, {n:"Build Your Own Bhel", p:50}],
+            manch: [{n:"Classic Manchurian", p:25}, {n:"Peri-Peri Manchurian", p:35}, {n:"Cheesy Manchurian", p:35}],
+            sides: [{n:"Classic Fries", p:50}, {n:"Cheesy Fries", p:70}, {n:"Chicken Popcorn (8pc)", p:39}, {n:"Chicken Nuggets (4pc)", p:49}],
+            combo: [{n:"Bhel + Fries + Drink", p:99}, {n:"Burger + Nuggets + Popcorn", p:129}, {n:"Manchurian + Bhel Jumbo", p:55}]
         };
 
         let cart = [];
         function render() {
-            Object.keys(menuItems).forEach(cat => {
+            Object.keys(menu).forEach(cat => {
                 const el = document.getElementById(cat + '-list');
-                menuItems[cat].forEach(item => {
-                    el.innerHTML += `<div class="bg-white p-3 rounded-xl border flex justify-between items-center shadow-sm">
-                        <div><p class="font-bold text-sm">${item.n}</p><p class="text-red-700 font-bold text-sm">₹${item.p}</p></div>
-                        <button onclick="addToCart('${item.n}', ${item.p})" class="brand-gold px-4 py-1 rounded-lg font-bold text-xs">ADD</button>
+                menu[cat].forEach(item => {
+                    el.innerHTML += `<div class="bg-white p-3 rounded-xl shadow-sm border flex justify-between items-center">
+                        <div class="flex flex-col"><span class="font-bold">${item.n}</span><span class="text-red-700 font-black">₹${item.p}</span></div>
+                        <button onclick="addToCart('${item.n}', ${item.p})" class="brand-gold text-black px-4 py-2 rounded-lg font-black text-[10px]">ADD</button>
                     </div>`;
                 });
             });
@@ -109,23 +110,23 @@
         function addToCart(n, p) {
             cart.push({n, p});
             document.getElementById('cart-count').innerText = cart.length;
-            updateCart();
-        }
-
-        function updateCart() {
-            const div = document.getElementById('cart-items');
-            div.innerHTML = cart.map(i => `<div class="flex justify-between text-xs"><span>${i.n}</span><span>₹${i.p}</span></div>`).join('');
-            document.getElementById('cart-total').innerText = cart.reduce((s, i) => s + i.p, 0);
+            document.getElementById('cart-items').innerHTML = cart.map(i => `<div class="flex justify-between py-1"><span>${i.n}</span><b>₹${i.p}</b></div>`).join('');
+            let total = cart.reduce((s, i) => s + i.p, 0);
+            document.getElementById('cart-total').innerText = total;
+            document.getElementById('del-label').innerText = total >= 199 ? "Total (FREE DELIVERY):" : "Total (+ Delivery Extra):";
         }
 
         function toggleCart() { document.getElementById('cartModal').classList.toggle('active'); }
 
         function checkout() {
             const n = document.getElementById('uName').value;
-            const a = document.getElementById('uAddr').value;
-            if(!n || !a) return alert("Fill details");
-            const msg = `*New Order*%0AName: ${n}%0AAddr: ${a}%0AItems: ${cart.map(i => i.n).join(', ')}%0ATotal: ₹${document.getElementById('cart-total').innerText}`;
-            window.open(`https://wa.me/919867163711?text=${msg}`);
+            const p = document.getElementById('uPhone').value;
+            const a = document.getElementById('uAddress').value;
+            if(!n || !p || !a) return alert("Please fill Name, Phone, and Address!");
+            const items = cart.map(i => i.n).join('%0A- ');
+            const total = document.getElementById('cart-total').innerText;
+            const text = `*NEW BITE & DELIGHT ORDER*%0A---%0A*Name:* ${n}%0A*Phone:* ${p}%0A*Address:* ${a}%0A---%0A*Items:*%0A- ${items}%0A---%0A*Total Amount: ₹${total}*`;
+            window.open(`https://wa.me/918090444814?text=${text}`);
         }
         render();
     </script>
