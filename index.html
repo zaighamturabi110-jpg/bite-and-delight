@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bite & Delight | Official Order App</title>
+    <title>Bite & Delight | Official Shop App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; color: #1a1a1a; }
         .brand-maroon { background-color: #700d16; }
         .brand-gold { background-color: #c5a059; }
-        .text-gold { color: #c5a059; }
-        .hero-gradient { background: linear-gradient(180deg, #700d16 0%, #3a070c 100%); }
         .cart-modal { display: none; position: fixed; inset: 0; background: white; z-index: 100; flex-direction: column; }
         .cart-modal.active { display: flex; }
-        .category-card { background: white; border-radius: 20px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body class="pb-24">
@@ -22,7 +19,7 @@
     <header class="brand-maroon text-white p-4 sticky top-0 z-50 flex justify-between items-center shadow-lg">
         <div>
             <h1 class="text-xl font-black text-gold italic uppercase tracking-tighter">Bite & Delight</h1>
-            <p class="text-[9px] font-bold opacity-80 uppercase tracking-widest">Mumbai's Premium Street Food</p>
+            <p class="text-[9px] font-bold opacity-80 uppercase tracking-widest text-white">Mumbai's Best Street Food</p>
         </div>
         <button onclick="toggleCart()" class="brand-gold px-5 py-2 rounded-xl font-black text-xs shadow-lg active:scale-95 transition-all">
             🛒 CART (<span id="cart-count">0</span>)
@@ -33,28 +30,19 @@
         🔥 FREE DELIVERY ON ORDERS ₹199 & ABOVE!
     </div>
 
-    <section class="hero-gradient text-white px-6 py-12 text-center">
-        <h2 class="text-gold font-black text-[10px] uppercase tracking-[0.3em] mb-2 italic">Taste of Mumbai</h2>
-        <h1 class="text-5xl font-black mb-4 leading-none italic uppercase">Bite &<br>Delight</h1>
-        <p class="text-gray-300 text-xs mb-8 font-bold italic uppercase tracking-tight">Burgers • Bhel • Manchurian • Fries</p>
-        <button onclick="document.getElementById('menu-start').scrollIntoView()" class="brand-gold text-black px-10 py-4 rounded-full font-black text-sm shadow-xl uppercase italic">Explore Full Menu</button>
-    </section>
+    <main id="menu-container" class="p-4 space-y-10 max-w-md mx-auto pt-6"></main>
 
-    <div class="bg-[#d32f2f] text-white p-5 text-center shadow-inner">
-        <h3 class="font-black text-md mb-1 uppercase italic">🔥 LIMITED TIME OFFER</h3>
-        <p class="text-[10px] font-bold opacity-90 uppercase">3 Chicken Cheese Burgers @ ₹199/- 🥳</p>
-    </div>
-
-    <main id="menu-start" class="p-4 space-y-10 max-w-md mx-auto">
-        <div id="menu-container" class="space-y-10"></div>
-    </main>
-
-    <footer class="brand-maroon text-white p-10 rounded-[40px] m-4 space-y-6 text-center shadow-2xl">
+    <footer class="brand-maroon text-white p-10 rounded-[40px] m-4 space-y-8 text-center shadow-2xl">
         <h2 class="text-3xl font-black text-gold italic uppercase">Bite & Delight</h2>
-        <div class="space-y-2">
-            <p class="text-[10px] font-black uppercase text-gold tracking-widest">Location</p>
+        
+        <div class="bg-white p-4 inline-block rounded-3xl border-4 border-gold shadow-xl">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zaighamturabi110-jpg.github.io/bite-and-delight/&color=700d16" class="w-40 h-40" alt="Scan to Order">
+        </div>
+        
+        <div class="space-y-4">
+            <p class="text-[10px] font-black text-gold uppercase tracking-[0.3em]">📸 SCREENSHOT THIS QR TO SHARE!</p>
             <p class="text-xs font-bold leading-relaxed uppercase opacity-80">
-                📍 317, Lokhandwala Chawl, Shop No. 325, West Bapty Road, Grant Road East Corner, Mumbai - 400008
+                📍 317, Lokhandwala Chawl, Shop No. 325, West Bapty Road, Grant Road East, Mumbai - 400008
             </p>
         </div>
         <p class="text-[8px] opacity-30 font-black uppercase tracking-[0.4em]">Powered by Caffeine.ai</p>
@@ -62,7 +50,7 @@
 
     <div id="cartModal" class="cart-modal">
         <div class="p-4 brand-maroon text-white flex justify-between items-center shadow-md">
-            <h2 class="font-black italic uppercase tracking-tighter">Your Order Tray</h2>
+            <h2 class="font-black italic uppercase">Your Tray</h2>
             <button onclick="toggleCart()" class="text-gold font-black text-sm uppercase">[ Close ]</button>
         </div>
         
@@ -70,84 +58,35 @@
             <div id="cart-items" class="space-y-3"></div>
             
             <div class="space-y-4">
-                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Delivery Details</p>
-                <input id="uName" type="text" placeholder="FULL NAME" class="w-full border-2 p-4 rounded-2xl font-black outline-none focus:border-gold uppercase text-sm">
+                <input id="uName" type="text" placeholder="CUSTOMER NAME" class="w-full border-2 p-4 rounded-2xl font-black outline-none focus:border-gold uppercase text-sm">
                 <textarea id="uAddress" placeholder="FULL DELIVERY ADDRESS" class="w-full border-2 p-4 rounded-2xl font-black outline-none focus:border-gold h-28 uppercase text-sm"></textarea>
             </div>
 
             <div class="bg-gray-50 p-5 rounded-[30px] border-2 border-dashed border-gray-200">
-                <p class="text-[10px] font-black text-gray-400 uppercase mb-4 text-center tracking-[0.2em]">Select Payment App</p>
+                <p class="text-[10px] font-black text-gray-400 uppercase mb-4 text-center tracking-[0.2em]">Select Payment Method</p>
                 <div class="grid grid-cols-1 gap-3">
-                    <button onclick="payUPI('gpay')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 transition-all shadow-sm">
-                        <span class="font-black text-xs uppercase">Google Pay (GPay)</span>
-                        <span class="text-blue-600 font-black text-[10px] uppercase">PAY NOW</span>
-                    </button>
-                    <button onclick="payUPI('phonepe')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 transition-all shadow-sm">
-                        <span class="font-black text-xs uppercase">PhonePe / Bajaj Pay</span>
-                        <span class="text-purple-600 font-black text-[10px] uppercase">PAY NOW</span>
-                    </button>
-                    <button onclick="payUPI('paytm')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 transition-all shadow-sm">
-                        <span class="font-black text-xs uppercase">Paytm / Navi</span>
-                        <span class="text-sky-500 font-black text-[10px] uppercase">PAY NOW</span>
-                    </button>
-                    <button onclick="setCOD()" id="codBtn" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 transition-all shadow-sm">
-                        <span class="font-black text-xs uppercase">Cash on Delivery</span>
-                        <span id="codLabel" class="text-green-600 font-black text-[10px] uppercase underline">SELECT</span>
-                    </button>
+                    <button onclick="payUPI('gpay')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs">Google Pay (GPay)</span><span class="text-blue-600 font-black text-[9px]">PAY NOW</span></button>
+                    <button onclick="payUPI('phonepe')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs">PhonePe / Bajaj Pay</span><span class="text-purple-600 font-black text-[9px]">PAY NOW</span></button>
+                    <button onclick="payUPI('paytm')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs">Paytm / Navi</span><span class="text-sky-500 font-black text-[9px]">PAY NOW</span></button>
+                    <button onclick="setCOD()" id="codBtn" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs text-green-700">Cash on Delivery</span><span id="codCheck" class="text-[9px] font-black">SELECT</span></button>
                 </div>
             </div>
         </div>
 
         <div class="p-6 border-t shadow-2xl bg-white space-y-4">
-            <div class="flex justify-between items-center">
-                <span class="font-black text-gray-400 uppercase text-xs tracking-widest">Grand Total</span>
-                <span class="text-3xl font-black text-[#700d16] italic">₹<span id="cart-total">0</span></span>
-            </div>
-            <button onclick="confirmToWhatsApp()" class="w-full brand-maroon text-gold py-5 rounded-3xl font-black text-xl shadow-xl uppercase italic tracking-tighter active:scale-95 transition-all">Confirm Order on WhatsApp</button>
+            <div class="flex justify-between items-center"><span class="font-black text-gray-400 uppercase text-xs">Total</span><span class="text-3xl font-black text-[#700d16] italic">₹<span id="cart-total">0</span></span></div>
+            <button onclick="confirmToWhatsApp()" class="w-full brand-maroon text-gold py-5 rounded-3xl font-black text-xl shadow-xl uppercase italic tracking-tighter active:scale-95">Confirm Order on WhatsApp</button>
         </div>
     </div>
 
     <script>
         const menuData = [
-            { cat: "BURGERS", items: [
-                {n:"Classic Chicken Burger", p:49},
-                {n:"Chicken Cheese Burger", p:69},
-                {n:"Tandoori Chicken Burger", p:89},
-                {n:"Peri-Peri Chicken Burger", p:79},
-                {n:"Chicken Garlic Burger", p:79}
-            ]},
-            { cat: "BHEL BOWLS", items: [
-                {n:"Classic Bhel", p:20},
-                {n:"Manchurian Bhel", p:30},
-                {n:"Tandoori Bhel", p:30},
-                {n:"Peri-Peri Bhel", p:30},
-                {n:"Cheesy Bhel", p:35}
-            ]},
-            { cat: "MANCHURIAN", items: [
-                {n:"Classic Manchurian", p:25},
-                {n:"Peri-Peri Manchurian", p:35},
-                {n:"Garlic Manchurian", p:35},
-                {n:"Cheesy Manchurian", p:35}
-            ]},
-            { cat: "FRIES", items: [
-                {n:"Classic Fries", p:50},
-                {n:"Cheesy Fries", p:70},
-                {n:"Peri-Peri Fries", p:70},
-                {n:"Tandoori Fries", p:70},
-                {n:"Cheesy Peri-Peri Fries", p:79}
-            ]},
-            { cat: "NUGGETS & POPCORN", items: [
-                {n:"Chicken Popcorn (12pc)", p:45},
-                {n:"Peri-Peri Popcorn (12pc)", p:55},
-                {n:"Chicken Nuggets (6pc)", p:59},
-                {n:"Loaded Nuggets (6pc)", p:69}
-            ]},
-            { cat: "SUPER SAVER COMBOS", items: [
-                {n:"Saver Combo", p:99},
-                {n:"Solo Bite Combo", p:129},
-                {n:"Double Delight", p:249},
-                {n:"Family Feast", p:449}
-            ]}
+            { cat: "BURGERS", items: [{n:"Classic Chicken Burger", p:49}, {n:"Chicken Cheese Burger", p:69}, {n:"Tandoori Chicken Burger", p:89}, {n:"Peri-Peri Chicken Burger", p:79}, {n:"Chicken Garlic Burger", p:79}]},
+            { cat: "BHEL SPECIALS", items: [{n:"Classic Bhel", p:20}, {n:"Manchurian Bhel", p:30}, {n:"Tandoori Bhel", p:30}, {n:"Peri-Peri Bhel", p:30}, {n:"Cheesy Bhel", p:35}]},
+            { cat: "CHINESE MANCHURIAN", items: [{n:"Classic Manchurian", p:25}, {n:"Peri-Peri Manchurian", p:35}, {n:"Garlic Manchurian", p:35}, {n:"Cheesy Manchurian", p:35}]},
+            { cat: "FRENCH FRIES", items: [{n:"Classic Fries", p:50}, {n:"Cheesy Fries", p:70}, {n:"Peri-Peri Fries", p:70}, {n:"Tandoori Fries", p:70}]},
+            { cat: "NUGGETS & POPCORN", items: [{n:"Chicken Popcorn (12pc)", p:45}, {n:"Chicken Nuggets (6pc)", p:59}, {n:"Loaded Nuggets (6pc)", p:69}]},
+            { cat: "SUPER SAVER COMBOS", items: [{n:"Saver Combo", p:99}, {n:"Solo Bite Combo", p:129}, {n:"Double Delight", p:249}, {n:"Family Feast", p:449}]}
         ];
 
         let cart = [];
@@ -158,18 +97,12 @@
             const container = document.getElementById('menu-container');
             menuData.forEach(section => {
                 let html = `<div class="space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="brand-maroon h-8 w-1.5 rounded-full"></div>
-                        <h3 class="text-xl font-black text-[#700d16] italic uppercase">${section.cat}</h3>
-                    </div>
+                    <div class="flex items-center gap-3"><div class="brand-maroon h-7 w-1.5 rounded-full"></div><h3 class="text-xl font-black text-[#700d16] italic uppercase">${section.cat}</h3></div>
                     <div class="grid gap-3">`;
                 section.items.forEach(item => {
-                    html += `<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-98 transition-all">
-                        <div class="flex-1">
-                            <h4 class="font-black text-gray-900 text-xs uppercase">${item.n}</h4>
-                            <span class="text-gold font-black italic text-lg tracking-tighter">₹${item.p}</span>
-                        </div>
-                        <button onclick="addToCart('${item.n}', ${item.p})" class="brand-gold text-white px-7 py-2 rounded-xl font-black text-[10px] uppercase shadow-md">ADD</button>
+                    html += `<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center transition-all">
+                        <div class="flex-1"><h4 class="font-black text-gray-900 text-xs uppercase">${item.n}</h4><span class="text-gold font-black italic text-lg tracking-tighter">₹${item.p}</span></div>
+                        <button onclick="addToCart('${item.n}', ${item.p})" class="brand-gold text-white px-7 py-2 rounded-xl font-black text-[10px] uppercase shadow-md active:scale-90">ADD</button>
                     </div>`;
                 });
                 html += `</div></div>`;
@@ -180,13 +113,7 @@
         function addToCart(n, p) { cart.push({n, p}); updateCart(); }
         function updateCart() {
             document.getElementById('cart-count').innerText = cart.length;
-            document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `<div class="flex justify-between font-black text-[10px] bg-gray-50 p-4 rounded-xl border border-gray-100 uppercase">
-                <span>${i.n}</span>
-                <div class="flex items-center gap-4">
-                    <span>₹${i.p}</span>
-                    <button onclick="removeItem(${idx})" class="text-red-500 font-black">✕</button>
-                </div>
-            </div>`).join('');
+            document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `<div class="flex justify-between font-black text-[10px] bg-gray-50 p-4 rounded-xl border border-gray-100 uppercase italic"><span>${i.n}</span><div class="flex items-center gap-4"><span>₹${i.p}</span><button onclick="removeItem(${idx})" class="text-red-500 font-black">✕</button></div></div>`).join('');
             document.getElementById('cart-total').innerText = cart.reduce((s, i) => s + i.p, 0);
         }
 
@@ -195,28 +122,28 @@
 
         function payUPI(app) {
             const total = document.getElementById('cart-total').innerText;
-            if(total == 0) return alert("Add some food to your tray first!");
+            if(total == 0) return alert("Your tray is empty!");
             paymentMethod = `PAID via ${app.toUpperCase()}`;
-            // This triggers the phone's native UPI app
             window.location.href = `upi://pay?pa=${upiID}&pn=BiteAndDelight&am=${total}&cu=INR`;
         }
 
         function setCOD() {
             paymentMethod = "CASH ON DELIVERY";
-            document.getElementById('codLabel').innerText = "SELECTED ✅";
+            document.getElementById('codCheck').innerText = "SELECTED ✅";
+            alert("Cash on Delivery selected!");
         }
 
         function confirmToWhatsApp() {
             const name = document.getElementById('uName').value;
             const addr = document.getElementById('uAddress').value;
-            if(!name || !addr) return alert("Please enter Name & Address!");
+            if(!name || !addr) return alert("Please enter Customer Name & Address!");
             if(cart.length === 0) return alert("Your tray is empty!");
 
             let foodList = "";
             cart.forEach((item, idx) => { foodList += `${idx + 1}. ${item.n} (₹${item.p})%0A`; });
             const total = document.getElementById('cart-total').innerText;
             
-            const message = `*🚨 BITE AND DELIGHT ORDER*%0A---%0A*Customer:* ${name}%0A*Address:* ${addr}%0A---%0A*Items:*%0A${foodList}%0A---%0A*Total Bill: ₹${total}*%0A*Payment:* ${paymentMethod}%0A---%0A_Shop Worker: Please start preparing the order!_`;
+            const message = `*🚨 BITE AND DELIGHT ORDER*%0A---%0A*Customer:* ${name}%0A*Address:* ${addr}%0A---%0A*Items to Prepare:*%0A${foodList}%0A---%0A*Total Bill: ₹${total}*%0A*Payment Mode:* ${paymentMethod}%0A---%0A_Worker: Start Preparation Immediately!_`;
             
             window.open(`https://api.whatsapp.com/send?phone=918090444814&text=${message}`);
         }
