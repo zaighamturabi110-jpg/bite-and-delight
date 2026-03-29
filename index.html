@@ -1,20 +1,19 @@
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bite & Delight | Premium Street Food</title>
+    <title>Bite & Delight | Shop Order System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: #1a1a1a; }
+        body { font-family: 'Inter', sans-serif; background-color: #f9f9f9; }
         .brand-maroon { background-color: #700d16; }
         .brand-gold { background-color: #c5a059; }
         .text-gold { color: #c5a059; }
         .hero-gradient { background: linear-gradient(180deg, #700d16 0%, #3a070c 100%); }
-        .cart-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: flex-end; }
+        .cart-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; align-items: flex-end; }
         .cart-modal.active { display: flex; }
-        .menu-card { background: white; border-radius: 24px; padding: 20px; border: 1px solid #f0f0f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body class="pb-10">
@@ -22,197 +21,62 @@
     <header class="brand-maroon text-white p-4 sticky top-0 z-50 flex justify-between items-center border-b border-gold/30">
         <div>
             <h1 class="text-xl font-black text-gold uppercase italic tracking-tighter">Bite & Delight</h1>
-            <a href="tel:9867163711" class="text-[10px] font-bold opacity-90 flex items-center gap-1">📞 CALL: 9867163711</a>
+            <p class="text-[10px] font-bold opacity-80 uppercase">Mumbai's Best Street Food</p>
         </div>
-        <button onclick="toggleCart()" class="brand-gold text-white px-4 py-2 rounded-xl font-black text-xs shadow-lg uppercase tracking-widest">
-            🛒 Cart (<span id="cart-count">0</span>)
+        <button onclick="toggleCart()" class="brand-gold text-white px-5 py-2 rounded-xl font-black text-xs shadow-lg">
+            🛒 CART (<span id="cart-count">0</span>)
         </button>
     </header>
 
-    <div class="bg-black text-white text-center py-2 text-[9px] font-black uppercase tracking-[0.2em]">
-        🔥 FREE HOME DELIVERY ON ORDERS ₹199 & ABOVE!
+    <div class="bg-black text-white text-center py-2 text-[9px] font-black uppercase tracking-widest">
+        🛵 FREE DELIVERY ON ORDERS ₹199+
     </div>
 
-    <section class="hero-gradient text-white px-8 py-16 text-center">
-        <h2 class="text-gold font-black text-[10px] uppercase tracking-[0.4em] mb-4 italic">Mumbai's Favourite</h2>
-        <h1 class="text-6xl font-black mb-6 leading-[0.9] italic tracking-tighter">BITE &<br>DELIGHT</h1>
-        <p class="text-gray-300 text-xs mb-10 leading-relaxed uppercase font-bold tracking-tight">
-            Crispy burgers, spicy bhel, fiery manchurian & more — <span class="text-gold underline">delivered hot to your door!</span>
-        </p>
-        <button onclick="document.getElementById('menu-start').scrollIntoView()" class="brand-gold text-black px-12 py-4 rounded-full font-black text-lg shadow-2xl uppercase tracking-tighter">View Full Menu</button>
-    </section>
+    <main id="menu-container" class="p-5 max-w-md mx-auto space-y-12">
+        </main>
 
-    <div class="bg-[#d32f2f] text-white p-6 text-center border-y-4 border-white/10">
-        <h3 class="font-black text-lg mb-1 uppercase italic tracking-tighter text-yellow-300">🔥 SPECIAL OFFER</h3>
-        <p class="text-[10px] font-black opacity-100 leading-tight uppercase tracking-tight">
-            Valid Till 31st March<br>
-            <span class="text-sm">3 Chicken Cheese Burgers @ ₹199/- 🥳</span>
-        </p>
-    </div>
-
-    <main id="menu-start" class="p-5 max-w-md mx-auto space-y-12">
-        
-        <div id="menu-container" class="space-y-12"></div>
-
-        <footer class="brand-maroon text-white p-10 rounded-[40px] space-y-10 shadow-2xl border-t-8 border-gold">
-            <div class="text-center">
-                <h2 class="text-4xl font-black text-gold italic mb-2 uppercase">Bite & Delight</h2>
-                <p class="text-[10px] opacity-50 font-black uppercase tracking-[0.3em]">Fresh • Hot • Fast</p>
-            </div>
-            
-            <div class="space-y-4 bg-black/20 p-6 rounded-3xl border border-white/10">
-                <h3 class="font-black text-gold uppercase text-[10px] tracking-widest">Store Location</h3>
-                <p class="text-xs font-bold leading-relaxed uppercase">
-                    📍 317, Lokhandwala Chawl, Shop No. 325, West Bapty Road, Arabgally Grant Road East Corner, Mumbai - 400008
-                </p>
-                <div class="pt-4">
-                    <h3 class="font-black text-gold uppercase text-[10px] tracking-widest mb-2">Order Helpline</h3>
-                    <a href="tel:9867163711" class="text-2xl font-black italic block">📞 9867163711</a>
-                </div>
-            </div>
-
-            <div class="text-center space-y-4">
-                <h3 class="font-black text-gold uppercase text-[10px] tracking-widest">Pay via UPI QR Code</h3>
-                <div class="bg-white p-4 inline-block rounded-3xl shadow-2xl border-4 border-gold">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=zaigham.turabi110-6@oksbi" class="w-40 h-40">
-                </div>
-                <p class="text-[10px] font-mono opacity-50">zaigham.turabi110-6@oksbi</p>
-                <div class="bg-gold/20 py-2 px-4 rounded-full inline-block">
-                    <span class="text-gold font-black text-sm italic">CASH ON DELIVERY AVAILABLE ✅</span>
-                </div>
-            </div>
-            
-            <p class="text-center text-[8px] opacity-30 font-black tracking-[0.5em] uppercase">Built with Caffeine.ai</p>
-        </footer>
-    </main>
+    <footer class="brand-maroon text-white p-10 rounded-[40px] m-4 space-y-8 text-center border-t-8 border-gold">
+        <h2 class="text-3xl font-black text-gold italic uppercase">Bite & Delight</h2>
+        <div class="bg-white p-4 inline-block rounded-3xl border-4 border-gold">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=zaigham.turabi110-6@oksbi" class="w-32 h-32">
+        </div>
+        <p class="text-[10px] font-bold text-gold uppercase">Scan to pay with any UPI App</p>
+        <p class="text-xs opacity-60">📍 317, Lokhandwala Chawl, Shop No. 325, West Bapty Road, Mumbai - 400008</p>
+    </footer>
 
     <div id="cartModal" class="cart-modal">
-        <div class="bg-white w-full rounded-t-[40px] p-8 max-h-[95vh] overflow-y-auto border-t-8 border-gold">
-            <h2 class="text-3xl font-black text-[#700d16] mb-6 italic uppercase tracking-tighter">Your Order</h2>
+        <div class="bg-white w-full rounded-t-[50px] p-8 max-h-[95vh] overflow-y-auto border-t-8 border-gold shadow-2xl">
+            <h2 class="text-3xl font-black text-[#700d16] mb-6 italic uppercase tracking-tighter">Your Order Details</h2>
+            
             <div id="cart-items" class="space-y-3 mb-8"></div>
             
             <div class="space-y-4 mb-8">
-                <input id="uName" type="text" placeholder="CUSTOMER NAME" class="w-full bg-gray-100 p-4 rounded-2xl font-black border-none outline-none text-sm uppercase">
-                <textarea id="uAddress" placeholder="FULL DELIVERY ADDRESS" class="w-full bg-gray-100 p-4 rounded-2xl font-black border-none outline-none h-24 text-sm uppercase"></textarea>
-                
-                <div class="flex gap-4">
-                    <div class="flex-1 p-4 bg-green-50 rounded-2xl border-2 border-green-200">
-                        <p class="text-[10px] font-black text-green-700 uppercase">Payment Method</p>
-                        <p class="font-bold text-sm">Cash on Delivery / UPI</p>
-                    </div>
+                <input id="uName" type="text" placeholder="CUSTOMER NAME" class="w-full bg-gray-100 p-4 rounded-2xl font-black border-none text-sm uppercase outline-none focus:ring-2 focus:ring-gold">
+                <textarea id="uAddress" placeholder="FULL DELIVERY ADDRESS" class="w-full bg-gray-100 p-4 rounded-2xl font-black border-none h-24 text-sm uppercase outline-none focus:ring-2 focus:ring-gold"></textarea>
+            </div>
+
+            <div class="mb-8 p-5 bg-gray-50 rounded-[30px] border-2 border-dashed border-gray-200 text-center">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">Pay on Delivery via</p>
+                <div class="grid grid-cols-3 gap-2">
+                    <span class="bg-white p-2 rounded-xl text-[9px] font-bold border shadow-sm">G-Pay</span>
+                    <span class="bg-white p-2 rounded-xl text-[9px] font-bold border shadow-sm">PhonePe</span>
+                    <span class="bg-white p-2 rounded-xl text-[9px] font-bold border shadow-sm">Paytm</span>
+                    <span class="bg-white p-2 rounded-xl text-[9px] font-bold border shadow-sm">Navi</span>
+                    <span class="bg-white p-2 rounded-xl text-[9px] font-bold border shadow-sm">Bajaj Pay</span>
+                    <span class="bg-white p-2 rounded-xl text-[9px] font-bold border shadow-sm">Cash</span>
                 </div>
             </div>
 
-            <div class="bg-black p-6 rounded-[24px] flex justify-between items-center mb-8">
-                <span class="font-black text-gray-500 uppercase text-[10px] tracking-widest">Total Pay</span>
+            <div class="bg-black p-6 rounded-[30px] flex justify-between items-center mb-8 shadow-xl">
+                <span class="font-black text-gray-400 uppercase text-[10px] tracking-widest">Total Pay</span>
                 <span class="text-3xl font-black text-gold italic">₹<span id="cart-total">0</span></span>
             </div>
 
-            <button onclick="checkout()" class="w-full brand-maroon text-gold py-6 rounded-3xl font-black text-xl shadow-2xl uppercase italic tracking-tighter">Place WhatsApp Order</button>
-            <button onclick="toggleCart()" class="w-full text-gray-400 font-bold text-[10px] mt-6 uppercase tracking-widest">Back to Menu</button>
+            <button onclick="sendToWorker()" class="w-full brand-maroon text-gold py-6 rounded-3xl font-black text-xl shadow-2xl uppercase italic tracking-tighter active:scale-95 transition-all">Send Order to Shop 🍔</button>
+            <button onclick="toggleCart()" class="w-full text-gray-300 font-bold text-[10px] mt-6 uppercase tracking-widest">Add More Items</button>
         </div>
     </div>
 
     <script>
         const menuData = [
-            { cat: "BURGERS", sub: "Big buns, bigger taste.", items: [
-                {n:"Classic Chicken Burger", d:"Juicy chicken patty with fresh veggies", p:49},
-                {n:"Chicken Cheese Burger", d:"Loaded with melty cheese", p:69},
-                {n:"Tandoori Chicken Burger", d:"Smoky tandoori flavor", p:89},
-                {n:"Peri-Peri Chicken Burger", d:"Fiery peri-peri sauce", p:79},
-                {n:"Chicken Garlic Burger", d:"Rich garlic mayo sauce", p:79}
-            ]},
-            { cat: "DESI BHEL BOWLS", sub: "Street style with a twist.", items: [
-                {n:"Classic Bhel", d:"Traditional Mumbai bhel", p:20},
-                {n:"Chinese Manchurian Bhel", d:"Fusion Chinese twist", p:30},
-                {n:"Tandoori Bhel", d:"Smoky tandoori masala", p:30},
-                {n:"Peri-Peri Bhel", d:"Spicy African kick", p:30},
-                {n:"Cheesy Bhel", d:"Extra cheese loaded", p:30},
-                {n:"Garlic Bhel", d:"Roasted garlic flavor", p:30},
-                {n:"Cheesy Peri Peri Bhel", d:"Cheese + fiery peri-peri", p:35},
-                {n:"Build Your Own Bhel", d:"Customize your perfect bowl", p:50}
-            ]},
-            { cat: "MANCHURIAN", sub: "Hot, spicy, and irresistible.", items: [
-                {n:"Classic Manchurian", d:"Original Indo-Chinese style", p:25},
-                {n:"Peri Peri Manchurian", d:"Spiced with peri-peri", p:35},
-                {n:"Garlic Manchurian", d:"Bold garlic sauce", p:35},
-                {n:"Tandoori Manchurian", d:"Tandoori spice blend", p:35},
-                {n:"Cheesy Manchurian", d:"Oozy cheese coating", p:35},
-                {n:"Cheesy Peri Peri Manchurian", d:"The ultimate combo", p:40}
-            ]},
-            { cat: "FRIES", sub: "Crispy, golden, and loaded.", items: [
-                {n:"Classic Fries", d:"Golden crispy fries", p:50},
-                {n:"Cheesy Fries", d:"Smothered in cheese sauce", p:70},
-                {n:"Peri-Peri Fries", d:"Spiced peri-peri seasoning", p:70},
-                {n:"Chipotle Fries", d:"Smoky chipotle flavor", p:70},
-                {n:"Garlic Fries", d:"Tossed in garlic butter", p:70},
-                {n:"Tandoori Fries", d:"Tandoori masala coated", p:70},
-                {n:"Cheesy Peri-Peri Fries", d:"Cheese meets peri-peri", p:79}
-            ]},
-            { cat: "NUGGETS & POPCORN", sub: "Perfect bite-sized snacks.", items: [
-                {n:"Chicken Popcorn Classic (8pc)", d:"Small", p:39},
-                {n:"Chicken Popcorn Classic (12pc)", d:"Medium", p:45},
-                {n:"Chicken Popcorn Classic (16pc)", d:"Large", p:59},
-                {n:"Popcorn Peri-Peri (8pc)", d:"Spicy Small", p:49},
-                {n:"Popcorn Peri-Peri (12pc)", d:"Spicy Medium", p:55},
-                {n:"Popcorn Peri-Peri (16pc)", d:"Spicy Large", p:69},
-                {n:"Chicken Nuggets (4 pcs)", d:"Perfect starter", p:49},
-                {n:"Chicken Nuggets (6 pcs)", d:"For sharing", p:59},
-                {n:"Chicken Nuggets (10 pcs)", d:"Hungry mode", p:89},
-                {n:"Loaded Nuggets (6 pcs)", d:"With cheese & sauces", p:69},
-                {n:"Loaded Nuggets (10 pcs)", d:"Ultimate loaded", p:109}
-            ]},
-            { cat: "SUPER SAVER COMBOS", sub: "Best value for your money!", items: [
-                {n:"Saver Combo", d:"Burger + Fries + Soft Drink", p:99},
-                {n:"Solo Bite Combo", d:"Burger + Fries + Nuggets (4 pcs)", p:129},
-                {n:"Double Delight", d:"2 Burgers + 2 Fries + Nuggets + Popcorn", p:249},
-                {n:"Family Feast", d:"4 Burgers + 4 Fries + 10 Nuggets + 12 Popcorn + 2 Manchurian", p:449}
-            ]}
-        ];
-
-        let cart = [];
-        function initMenu() {
-            const container = document.getElementById('menu-container');
-            menuData.forEach(section => {
-                let html = `<section class="space-y-6">
-                    <div class="flex items-center gap-3">
-                        <div class="brand-maroon h-10 w-1.5 rounded-full"></div>
-                        <h3 class="text-2xl font-black text-[#700d16] italic uppercase tracking-tighter">${section.cat}</h3>
-                    </div>
-                    <div class="grid gap-4">`;
-                section.items.forEach(item => {
-                    html += `<div class="menu-card flex justify-between items-center transition-all active:scale-[0.98]">
-                        <div class="flex-1 pr-4">
-                            <h4 class="font-black text-gray-900 text-xs uppercase tracking-tight">${item.n}</h4>
-                            <p class="text-[9px] text-gray-400 font-bold uppercase mb-2 tracking-tighter">${item.d}</p>
-                            <span class="text-gold font-black italic text-lg tracking-tight">₹${item.p}</span>
-                        </div>
-                        <button onclick="addToCart('${item.n}', ${item.p})" class="brand-gold text-white px-7 py-3 rounded-xl font-black text-[10px] uppercase shadow-md active:bg-black">ADD</button>
-                    </div>`;
-                });
-                html += `</div></section>`;
-                container.innerHTML += html;
-            });
-        }
-        function addToCart(n, p) { cart.push({n, p}); updateCart(); }
-        function updateCart() {
-            document.getElementById('cart-count').innerText = cart.length;
-            document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `<div class="flex justify-between font-black text-[10px] bg-gray-50 p-4 rounded-xl border border-gray-100 uppercase italic"><span>${i.n}</span><div class="flex items-center gap-5"><span class="text-gold">₹${i.p}</span><button onclick="removeItem(${idx})" class="text-red-500">✕</button></div></div>`).join('');
-            document.getElementById('cart-total').innerText = cart.reduce((s, i) => s + i.p, 0);
-        }
-        function removeItem(idx) { cart.splice(idx, 1); updateCart(); }
-        function toggleCart() { document.getElementById('cartModal').classList.toggle('active'); }
-        function checkout() {
-            const name = document.getElementById('uName').value;
-            const addr = document.getElementById('uAddress').value;
-            if(!name || !addr) return alert("Please enter Name & Delivery Address!");
-            const items = cart.map(i => `• ${i.n} (₹${i.p})`).join('%0A');
-            const total = document.getElementById('cart-total').innerText;
-            const text = `*BITE & DELIGHT NEW ORDER*%0A---%0A*Name:* ${name}%0A*Address:* ${addr}%0A---%0A*Items:*%0A${items}%0A---%0A*Total: ₹${total}*%0A*(Cash on Delivery / UPI)*`;
-            window.open(`https://wa.me/918090444814?text=${text}`);
-        }
-        initMenu();
-    </script>
-</body>
-</html>
-   
+            {
