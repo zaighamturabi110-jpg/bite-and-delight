@@ -79,4 +79,97 @@
 
     <script>
         const menuData = [
-            {
+            { cat: "BURGERS", items: [
+                {n:"Classic Chicken Burger", d:"Fresh patty & veggies", p:49},
+                {n:"Chicken Cheese Burger", d:"Extra melty cheese", p:69},
+                {n:"Tandoori Chicken Burger", d:"Smoky tandoori taste", p:89},
+                {n:"Peri-Peri Chicken Burger", d:"Spicy peri-peri", p:79},
+                {n:"Chicken Garlic Burger", d:"Garlic mayo blend", p:79}
+            ]},
+            { cat: "DESI BHEL", items: [
+                {n:"Classic Bhel", d:"Mumbai original", p:20},
+                {n:"Manchurian Bhel", d:"Fusion Chinese", p:30},
+                {n:"Cheesy Bhel", d:"Cheese loaded", p:30},
+                {n:"Peri-Peri Bhel", d:"Hot & spicy", p:30}
+            ]},
+            { cat: "FRIES", items: [
+                {n:"Classic Fries", d:"Salted golden", p:50},
+                {n:"Cheesy Fries", d:"Cheese dip", p:70},
+                {n:"Peri-Peri Fries", d:"Fiery spice", p:70},
+                {n:"Tandoori Fries", d:"Indian spices", p:70}
+            ]},
+            { cat: "COMBOS", items: [
+                {n:"Saver Combo", d:"Burger+Fries+Drink", p:99},
+                {n:"Family Feast", d:"4 Burgers + Large Sides", p:449}
+            ]}
+        ];
+
+        let cart = [];
+
+        function initMenu() {
+            const container = document.getElementById('menu-container');
+            menuData.forEach(section => {
+                let html = `<div class="space-y-5">
+                    <div class="flex items-center gap-3">
+                        <div class="brand-maroon h-8 w-1.5 rounded-full"></div>
+                        <h3 class="text-2xl font-black text-[#700d16] italic uppercase tracking-tighter">${section.cat}</h3>
+                    </div>
+                    <div class="grid gap-4">`;
+                section.items.forEach(item => {
+                    html += `<div class="bg-white p-5 rounded-[24px] shadow-sm border border-gray-100 flex justify-between items-center">
+                        <div class="flex-1 pr-4">
+                            <h4 class="font-black text-gray-900 text-xs uppercase">${item.n}</h4>
+                            <p class="text-[9px] text-gray-400 font-bold mb-2 uppercase">${item.d}</p>
+                            <span class="text-gold font-black italic text-lg">₹${item.p}</span>
+                        </div>
+                        <button onclick="addToCart('${item.n}', ${item.p})" class="brand-gold text-white px-7 py-3 rounded-xl font-black text-[10px] uppercase shadow-md active:scale-90 transition-all">ADD</button>
+                    </div>`;
+                });
+                html += `</div></div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        function addToCart(n, p) { cart.push({n, p}); updateCart(); }
+        
+        function updateCart() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const itemsDiv = document.getElementById('cart-items');
+            itemsDiv.innerHTML = cart.map((i, idx) => `<div class="flex justify-between font-black text-[10px] bg-gray-50 p-4 rounded-xl border border-gray-100 uppercase italic">
+                <span class="text-gray-600">${i.n}</span>
+                <div class="flex items-center gap-4">
+                    <span class="text-gold">₹${i.p}</span>
+                    <button onclick="removeItem(${idx})" class="text-red-500 font-black">✕</button>
+                </div>
+            </div>`).join('');
+            document.getElementById('cart-total').innerText = cart.reduce((s, i) => s + i.p, 0);
+        }
+
+        function removeItem(idx) { cart.splice(idx, 1); updateCart(); }
+        function toggleCart() { document.getElementById('cartModal').classList.toggle('active'); }
+
+        function sendToWorker() {
+            const name = document.getElementById('uName').value;
+            const addr = document.getElementById('uAddress').value;
+            if(!name || !addr) return alert("Please enter Customer Name & Full Address!");
+            if(cart.length === 0) return alert("Cart is empty!");
+            
+            // Generate full item list for the shop worker
+            let foodList = "";
+            cart.forEach((item, index) => {
+                foodList += `${index + 1}. ${item.n} - ₹${item.p}%0A`;
+            });
+            
+            const total = document.getElementById('cart-total').innerText;
+            const myWhatsApp = "918090444814";
+            
+            // Professional formatted message for the shop worker
+            const message = `*🚨 NEW BITE AND DELIGHT ORDER*%0A---%0A*CUSTOMER:* ${name}%0A*ADDRESS:* ${addr}%0A---%0A*ITEMS TO PREPARE:*%0A${foodList}%0A---%0A*TOTAL BILL: ₹${total}*%0A---%0A*PAYMENT:* GPay/PhonePe/Cash%0A---%0A_Please start preparing the order!_`;
+            
+            window.open(`https://api.whatsapp.com/send?phone=${myWhatsApp}&text=${message}`);
+        }
+
+        initMenu();
+    </script>
+</body>
+</html>
