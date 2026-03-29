@@ -12,6 +12,8 @@
         .brand-gold { background-color: #c5a059; }
         .cart-modal { display: none; position: fixed; inset: 0; background: white; z-index: 100; flex-direction: column; }
         .cart-modal.active { display: flex; }
+        /* Fix: White text on Maroon button */
+        .confirm-btn { background-color: #700d16 !important; color: #ffffff !important; font-weight: 900 !important; }
     </style>
 </head>
 <body class="pb-24">
@@ -21,7 +23,7 @@
             <h1 class="text-xl font-black text-gold italic uppercase tracking-tighter">Bite & Delight</h1>
             <p class="text-[9px] font-bold opacity-80 uppercase tracking-widest text-white">Mumbai's Best Street Food</p>
         </div>
-        <button onclick="toggleCart()" class="brand-gold px-5 py-2 rounded-xl font-black text-xs shadow-lg active:scale-95 transition-all">
+        <button onclick="toggleCart()" class="brand-gold px-5 py-2 rounded-xl font-black text-xs shadow-lg active:scale-95 transition-all text-white">
             🛒 CART (<span id="cart-count">0</span>)
         </button>
     </header>
@@ -36,11 +38,10 @@
         <h2 class="text-3xl font-black text-gold italic uppercase">Bite & Delight</h2>
         
         <div class="bg-white p-4 inline-block rounded-3xl border-4 border-gold shadow-xl">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zaighamturabi110-jpg.github.io/bite-and-delight/&color=700d16" class="w-40 h-40" alt="Scan to Order">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zaighamturabi110-jpg.github.io/bite-and-delight/&color=700d16" class="w-40 h-40" alt="Bite and Delight QR">
         </div>
         
         <div class="space-y-4">
-            <p class="text-[10px] font-black text-gold uppercase tracking-[0.3em]">📸 SCREENSHOT THIS QR TO SHARE!</p>
             <p class="text-xs font-bold leading-relaxed uppercase opacity-80">
                 📍 317, Lokhandwala Chawl, Shop No. 325, West Bapty Road, Grant Road East, Mumbai - 400008
             </p>
@@ -63,19 +64,19 @@
             </div>
 
             <div class="bg-gray-50 p-5 rounded-[30px] border-2 border-dashed border-gray-200">
-                <p class="text-[10px] font-black text-gray-400 uppercase mb-4 text-center tracking-[0.2em]">Select Payment Method</p>
+                <p class="text-[10px] font-black text-gray-400 uppercase mb-4 text-center tracking-[0.2em]">Payment Method</p>
                 <div class="grid grid-cols-1 gap-3">
-                    <button onclick="payUPI('gpay')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs">Google Pay (GPay)</span><span class="text-blue-600 font-black text-[9px]">PAY NOW</span></button>
-                    <button onclick="payUPI('phonepe')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs">PhonePe / Bajaj Pay</span><span class="text-purple-600 font-black text-[9px]">PAY NOW</span></button>
-                    <button onclick="payUPI('paytm')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs">Paytm / Navi</span><span class="text-sky-500 font-black text-[9px]">PAY NOW</span></button>
-                    <button onclick="setCOD()" id="codBtn" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs text-green-700">Cash on Delivery</span><span id="codCheck" class="text-[9px] font-black">SELECT</span></button>
+                    <button onclick="payUPI('gpay')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs uppercase">Google Pay (GPay)</span><span class="text-blue-600 font-black text-[9px] uppercase">PAY NOW</span></button>
+                    <button onclick="payUPI('phonepe')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs uppercase">PhonePe / Bajaj Pay</span><span class="text-purple-600 font-black text-[9px] uppercase">PAY NOW</span></button>
+                    <button onclick="payUPI('paytm')" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs uppercase">Paytm / Navi</span><span class="text-sky-500 font-black text-[9px] uppercase">PAY NOW</span></button>
+                    <button onclick="setCOD()" class="flex justify-between items-center bg-white border p-4 rounded-2xl active:scale-95 shadow-sm"><span class="font-black text-xs text-green-700 uppercase">Cash on Delivery</span><span id="codCheck" class="text-[9px] font-black uppercase">SELECT</span></button>
                 </div>
             </div>
         </div>
 
         <div class="p-6 border-t shadow-2xl bg-white space-y-4">
-            <div class="flex justify-between items-center"><span class="font-black text-gray-400 uppercase text-xs">Total</span><span class="text-3xl font-black text-[#700d16] italic">₹<span id="cart-total">0</span></span></div>
-            <button onclick="confirmToWhatsApp()" class="w-full brand-maroon text-gold py-5 rounded-3xl font-black text-xl shadow-xl uppercase italic tracking-tighter active:scale-95">Confirm Order on WhatsApp</button>
+            <div class="flex justify-between items-center"><span class="font-black text-gray-400 uppercase text-xs tracking-widest">Grand Total</span><span class="text-3xl font-black text-[#700d16] italic">₹<span id="cart-total">0</span></span></div>
+            <button onclick="confirmToWhatsApp()" class="confirm-btn w-full py-5 rounded-3xl text-xl shadow-xl uppercase italic tracking-tighter active:scale-95">Confirm Order on WhatsApp</button>
         </div>
     </div>
 
@@ -89,65 +90,16 @@
             { cat: "SUPER SAVER COMBOS", items: [{n:"Saver Combo", p:99}, {n:"Solo Bite Combo", p:129}, {n:"Double Delight", p:249}, {n:"Family Feast", p:449}]}
         ];
 
-        let cart = [];
-        let paymentMethod = "Not Selected";
-        const upiID = "zaigham.turabi110-6@oksbi";
+        let cart = []; let paymentMethod = "Not Selected"; const upiID = "zaigham.turabi110-6@oksbi";
 
-        function initMenu() {
-            const container = document.getElementById('menu-container');
-            menuData.forEach(section => {
-                let html = `<div class="space-y-4">
-                    <div class="flex items-center gap-3"><div class="brand-maroon h-7 w-1.5 rounded-full"></div><h3 class="text-xl font-black text-[#700d16] italic uppercase">${section.cat}</h3></div>
-                    <div class="grid gap-3">`;
-                section.items.forEach(item => {
-                    html += `<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center transition-all">
-                        <div class="flex-1"><h4 class="font-black text-gray-900 text-xs uppercase">${item.n}</h4><span class="text-gold font-black italic text-lg tracking-tighter">₹${item.p}</span></div>
-                        <button onclick="addToCart('${item.n}', ${item.p})" class="brand-gold text-white px-7 py-2 rounded-xl font-black text-[10px] uppercase shadow-md active:scale-90">ADD</button>
-                    </div>`;
-                });
-                html += `</div></div>`;
-                container.innerHTML += html;
-            });
-        }
-
+        function initMenu() { const container = document.getElementById('menu-container'); menuData.forEach(section => { let html = `<div class="space-y-4"><div class="flex items-center gap-3"><div class="brand-maroon h-7 w-1.5 rounded-full"></div><h3 class="text-xl font-black text-[#700d16] italic uppercase">${section.cat}</h3></div><div class="grid gap-3">`; section.items.forEach(item => { html += `<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center"><div class="flex-1"><h4 class="font-black text-gray-900 text-xs uppercase">${item.n}</h4><span class="text-gold font-black italic text-lg tracking-tighter">₹${item.p}</span></div><button onclick="addToCart('${item.n}', ${item.p})" class="brand-gold text-white px-7 py-2 rounded-xl font-black text-[10px] uppercase shadow-md active:scale-90">ADD</button></div>`; }); html += `</div></div>`; container.innerHTML += html; }); }
         function addToCart(n, p) { cart.push({n, p}); updateCart(); }
-        function updateCart() {
-            document.getElementById('cart-count').innerText = cart.length;
-            document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `<div class="flex justify-between font-black text-[10px] bg-gray-50 p-4 rounded-xl border border-gray-100 uppercase italic"><span>${i.n}</span><div class="flex items-center gap-4"><span>₹${i.p}</span><button onclick="removeItem(${idx})" class="text-red-500 font-black">✕</button></div></div>`).join('');
-            document.getElementById('cart-total').innerText = cart.reduce((s, i) => s + i.p, 0);
-        }
-
+        function updateCart() { document.getElementById('cart-count').innerText = cart.length; document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `<div class="flex justify-between font-black text-[10px] bg-gray-50 p-4 rounded-xl border border-gray-100 uppercase italic"><span>${i.n}</span><div class="flex items-center gap-4"><span>₹${i.p}</span><button onclick="removeItem(${idx})" class="text-red-500 font-black">✕</button></div></div>`).join(''); document.getElementById('cart-total').innerText = cart.reduce((s, i) => s + i.p, 0); }
         function removeItem(idx) { cart.splice(idx, 1); updateCart(); }
         function toggleCart() { document.getElementById('cartModal').classList.toggle('active'); }
-
-        function payUPI(app) {
-            const total = document.getElementById('cart-total').innerText;
-            if(total == 0) return alert("Your tray is empty!");
-            paymentMethod = `PAID via ${app.toUpperCase()}`;
-            window.location.href = `upi://pay?pa=${upiID}&pn=BiteAndDelight&am=${total}&cu=INR`;
-        }
-
-        function setCOD() {
-            paymentMethod = "CASH ON DELIVERY";
-            document.getElementById('codCheck').innerText = "SELECTED ✅";
-            alert("Cash on Delivery selected!");
-        }
-
-        function confirmToWhatsApp() {
-            const name = document.getElementById('uName').value;
-            const addr = document.getElementById('uAddress').value;
-            if(!name || !addr) return alert("Please enter Customer Name & Address!");
-            if(cart.length === 0) return alert("Your tray is empty!");
-
-            let foodList = "";
-            cart.forEach((item, idx) => { foodList += `${idx + 1}. ${item.n} (₹${item.p})%0A`; });
-            const total = document.getElementById('cart-total').innerText;
-            
-            const message = `*🚨 BITE AND DELIGHT ORDER*%0A---%0A*Customer:* ${name}%0A*Address:* ${addr}%0A---%0A*Items to Prepare:*%0A${foodList}%0A---%0A*Total Bill: ₹${total}*%0A*Payment Mode:* ${paymentMethod}%0A---%0A_Worker: Start Preparation Immediately!_`;
-            
-            window.open(`https://api.whatsapp.com/send?phone=918090444814&text=${message}`);
-        }
-
+        function payUPI(app) { const total = document.getElementById('cart-total').innerText; if(total == 0) return alert("Tray empty!"); paymentMethod = `PAID via ${app.toUpperCase()}`; window.location.href = `upi://pay?pa=${upiID}&pn=BiteAndDelight&am=${total}&cu=INR`; }
+        function setCOD() { paymentMethod = "CASH ON DELIVERY"; document.getElementById('codCheck').innerText = "SELECTED ✅"; alert("Cash on Delivery selected!"); }
+        function confirmToWhatsApp() { const name = document.getElementById('uName').value; const addr = document.getElementById('uAddress').value; if(!name || !addr) return alert("Enter Name & Address!"); let foodList = ""; cart.forEach((item, idx) => { foodList += `${idx + 1}. ${item.n} (₹${item.p})%0A`; }); const total = document.getElementById('cart-total').innerText; const message = `*🚨 BITE AND DELIGHT ORDER*%0A---%0A*Customer:* ${name}%0A*Address:* ${addr}%0A---%0A*Items to Prepare:*%0A${foodList}%0A---%0A*Total Bill: ₹${total}*%0A*Payment Mode:* ${paymentMethod}%0A---%0A_Worker: Start Preparation Immediately!_`; window.open(`https://api.whatsapp.com/send?phone=918090444814&text=${message}`); }
         initMenu();
     </script>
 </body>
